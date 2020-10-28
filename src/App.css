@@ -1,6 +1,84 @@
-.App {
-  text-align: center;
+/* .App {
+  min-height: 100vh;
+  min-width: 100vh;
+  background-image: linear-gradient(#000000, #0d2d35), url('./assets/group-243.png');  
 }
+.App2 {
+  
+} */
+
+/* .App {
+  margin: 0;
+  padding: 0;
+  background-image: url('./assets/group-243.png');
+  min-height: 100vh;
+  min-width: 100vh;
+}
+
+.App:before {
+  content: " ";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  background-image: url('./assets/rectangle-1.png');
+} */
+
+.App {
+  display: flex; /* or inline-flex */
+}
+
+.left-25 {
+  width: 25%;
+  height: 100%;
+  background-color: salmon;
+}
+.right-25 {
+  width: 25%;
+  height: 100%;
+  background-color: seagreen;
+
+}
+.center-50 {
+  width: 50%;
+  height: 100%;
+  background-color: skyblue;
+  padding: 3em;
+  
+}
+.center-content{
+  /* text-align: center; */
+  /* display: flex;
+  flex-wrap: wrap;
+  align-content: center; */
+}
+
+@media (max-width: 756px){
+  .left-25 {
+    width: 100%;
+  }
+  .right-25 {
+    width: 100%;
+  }
+  .center-50 {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .App-logo {
   height: 40vmin;
