@@ -1,7 +1,8 @@
 import React from 'react'
 import Person from './assets/svgImage/Person'
 import Cross from './assets/svgImage/Cross'
-import Button from './component/Button'
+import Gamepad from  './assets/svgImage/GamePad'
+//import Button from './component/Button'
 
 const Left = ({name,level, onStop, onQuit, start, stop}) =>  {
     return (
@@ -9,17 +10,17 @@ const Left = ({name,level, onStop, onQuit, start, stop}) =>  {
         { start === true ? 
         <>
           <div
-          className='heading-medium'
+          className='heading-icon'
           >
             <Person/>
             {name}
           </div>
 
           <div
-          className='heading-medium'
+          className='heading-icon'
           >
-            <Cross/>
-            LEVEL: {level}
+            <Gamepad/>
+            LEVEL: {level.toUpperCase()}
           </div>
         
 
@@ -28,26 +29,38 @@ const Left = ({name,level, onStop, onQuit, start, stop}) =>  {
             className='all-games'
           >
             <div
-            className='heading-small'
+            className='sub-heading'
             >
               Score Board
             </div>
-
-            <div>
-              <Button
-              text='Stop'
-              onClick={onStop}
-              />
+            <div
+              className='player-score'
+            >
+              Game1 : 02:02
             </div>
-
-            
           </div>
-          : <div>
-          <Button
-          text='Quit'
-          onClick={onQuit}
-          />
-        </div> }
+          : null }
+
+          
+          {
+            stop === false ? 
+            <button
+              className='left-bottom'
+              onClick={onStop}
+              >
+                <Cross/>
+                Stop
+            </button>
+            :
+            <button
+              className='left-bottom'
+              onClick={onQuit}
+              >
+                Quit
+            </button>
+          }
+            
+
 
 
             

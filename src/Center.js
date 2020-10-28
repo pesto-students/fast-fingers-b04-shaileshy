@@ -2,9 +2,10 @@ import React, {useState, useCallback, useEffect} from 'react'
 import './assets/css/center.css'
 import Keyboard from './assets/svgImage/Keyboard'
 import Play from './assets/svgImage/Play'
-//import Input from './component/Input/index'
+import Replay from './assets/svgImage/Reload'
+// import Input from './component/Input/index'
 import Select from './component/Select/index'
-import Button from './component/Button/index'
+// import Button from './component/Button/index'
 let dictionary = require('./data/dictionary.json');
 
 const getAllWord = () => {
@@ -44,14 +45,32 @@ const getAllWord = () => {
 };
 
 
-const  Center = ({name, level, preStart, start, postStart , error, onNameChange, onLevelChange, onStart}) => {
+const  Center = ({name, level, preStart, start, stop, postStart,
+     error, onNameChange, onLevelChange, onStart, score, onReplay}) => {
     const [word, setWord] = useState({
-        easy: '',
-        medium: '',
-        hard: ''
+        easy: [],
+        medium: [],
+        hard: []
     });
     const [currentWord, setCurrentWord] = useState('start');
     const [typeWord, setTypeWord] = useState('')
+
+
+    const getWord = useCallback(() =>  {
+        console.log('getWord called');
+        // debugger;
+        let text = word[level][Math.floor(Math.random() * word[level].length)];
+        return setCurrentWord(text);
+    }, [word, level]);
+
+    useEffect ( () => {
+        if(word.easy.level  === 0){
+            setWord(getAllWord());
+            getWord();
+        }
+    }, [word, getWord])
+
+
 
     // const matchWord = useCallback( (e) => {
     //     console.log('mach Word Call')
@@ -70,36 +89,32 @@ const  Center = ({name, level, preStart, start, postStart , error, onNameChange,
 
 
 
-    // const getWord = useCallback(() =>  {
-    //     console.log('getWord called');
-    //     // debugger;
-    //     let text = word[level][Math.floor(Math.random() * word[level].length)];
-    //     return setCurrentWord(text);
-    // }, [word,level, start]);
+    
 
 
     const onTextChange = (val) => setTypeWord(val);
 
     return (
         <>
-         {preStart ? <div 
+         {preStart === true ? <div 
             className='center'
         >
             <Keyboard/>
 
             <div
-            className='title'
+            className='heading'
             >
             fast fingers
             </div>
 
             <div
-            className="subTitle"
+            className="sub-heading"
             > 
             -------- The Ultimate Typing Game  ---------
             </div>
 
             <input 
+                placeholder="Type Your Name"
                 value={name}
                 onChange={(e) =>onNameChange(e.target.value) }
             />
@@ -114,20 +129,30 @@ const  Center = ({name, level, preStart, start, postStart , error, onNameChange,
             onLevelChange={onLevelChange}
             />
 
-            { error ? <div> Please Enter Name </div> : '' }
+            { error ? <div className="error"> Please Enter Name </div> : '' }
 
-            <Button
+
+            <button
+                onClick ={onStart}
+            >
+                <Play/>
+                Start Game
+            </button>
+
+
+            {/* <Button
             text = "Start Game"
             onClick = {onStart}
             >
                 <Play/>
-            </Button>
+            </Button> */}
         </div>  : null }         
             
-         {start ? 
+         {start === true && stop === false ? 
          <div>
-            <h2>{currentWord}</h2>
+            <h2 className='current-word'>{currentWord}</h2>
             <input 
+                style={{'textAlign': 'center'}}
                 value={typeWord}
                 onChange={(e) =>onTextChange(e.target.value) }
             />
@@ -139,9 +164,27 @@ const  Center = ({name, level, preStart, start, postStart , error, onNameChange,
         : null }
 
           {postStart ? 
+          <>
           <div>
-              Quit Time
-          </div> 
+            <div
+            className='score-game'
+                >
+                Score : Game 5
+            </div> 
+            <div
+            className='total-score'
+                >
+                {score}
+            </div> 
+            <button
+            onClick = {onReplay}
+            >
+                <Replay/>
+                &nbsp; Play Again
+            </button>
+          </div>
+          </>
+
         : null}
         </>
     )

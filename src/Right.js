@@ -1,19 +1,27 @@
 import React from 'react'
+import Timer from './Timer'
 
-const Right = ( {start, stop, score} ) => {
+
+const Right = ( {start, stop, score, timerUp, onUpdateScore, onTimerUpdate} ) => {
     return (
         <>
         { start === true ?
         <>
             <div
-            className = 'heading-medium'
+            className = 'heading-icon'
             >
                 fast fingers
             </div>
             { stop === false ? 
                 <div
-                className = 'heading-medium'>
-                    SCORE: {score}
+                className = 'heading-icon'>
+                    SCORE: 
+                    <Timer
+                        timerUp={timerUp}
+                        score={score}
+                        onUpdateScore={onUpdateScore}
+                        onTimerUpdate={onTimerUpdate}
+                    />
                 </div>
             : null }
         </>
