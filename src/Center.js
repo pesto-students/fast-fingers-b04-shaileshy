@@ -53,29 +53,29 @@ const  Center = ({name, level, preStart, start, postStart , error, onNameChange,
     const [currentWord, setCurrentWord] = useState('start');
     const [typeWord, setTypeWord] = useState('')
 
-    const matchWord = useCallback( (e) => {
-        console.log('mach Word Call')
-        //setTypeWord(e.target.value)
-        if(word === e.target.value){
-            setWord(getWord().easyWord)
-        }
-        else{
-            console.log('Not Matched')
-        }
-    }, [word])
+    // const matchWord = useCallback( (e) => {
+    //     console.log('mach Word Call')
+    //     //setTypeWord(e.target.value)
+    //     if(word === e.target.value){
+    //         setWord(getWord().easyWord)
+    //     }
+    //     else{
+    //         console.log('Not Matched')
+    //     }
+    // }, [word])
 
-    const enterWord = useCallback(() => {
-        setWord(getAllWord);
-    }, [start])
+    // const enterWord = useCallback(() => {
+    //     setWord(getAllWord);
+    // }, [start])
 
 
 
-    const getWord = useCallback(() =>  {
-        console.log('getWord called');
-        // debugger;
-        let text = word[level][Math.floor(Math.random() * word[level].length)];
-        return setCurrentWord(text);
-    }, [word,level, start]);
+    // const getWord = useCallback(() =>  {
+    //     console.log('getWord called');
+    //     // debugger;
+    //     let text = word[level][Math.floor(Math.random() * word[level].length)];
+    //     return setCurrentWord(text);
+    // }, [word,level, start]);
 
 
     const onTextChange = (val) => setTypeWord(val);
